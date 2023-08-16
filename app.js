@@ -41,8 +41,9 @@ app.get('/add-to-cart/:animalId', (req, res) => {
   if(!sess.cart) {
     sess.cart = {};
   }
+  let cart = req.session.cart;
 
-  if(!(animalId in sess.cart)) {
+  if(!sess.cart[animalId]) {
     sess.cart[animalId] = 0;
   }
   sess.cart[animalId] += 1;
@@ -55,7 +56,7 @@ app.get('/cart', (req, res) => {
   if(!req.session.cart) {
     req.session.cart = {};
   }
-  const cart = req.session.cart;
+  let cart = req.session.cart
   const animals = [];
   let orderTotal = 0;
 
